@@ -142,7 +142,7 @@
     
         <div class="container text-center">
         
-            <h1 id="header-text">Fluid Mechanics</h1>
+            <h1 id="header-text">Fluid Controls</h1>
             <p>Measurment System Analysis</p>
             
             <div id="jquery-errorMessages" class="alert alert-danger" role="alert">
