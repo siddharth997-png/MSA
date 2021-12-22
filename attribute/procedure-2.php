@@ -189,11 +189,11 @@
 
                 } if(errorMessage != "") {
                     
-                    // $("#jquery-errors").html(errorMessage);
-                    // $("#jquery-errors").show();
-                    // $("form").submit(function(e){
-                    //     e.preventDefault();
-                    // });
+                    $("#jquery-errors").html(errorMessage);
+                    $("#jquery-errors").show();
+                    $("form").submit(function(e){
+                        e.preventDefault();
+                    });
                     
                 } else {
                     
