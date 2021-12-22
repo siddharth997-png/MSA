@@ -9,9 +9,9 @@ if(!array_key_exists('currentId',$_SESSION)) {
     header("Location: procedure-1.php");
 }
 
-$numApp = 3;
-$numTrials = 3;
-$numSamples = 10;
+$numApp = (int)$_SESSION['num-app'];
+$numTrials = (int)$_SESSION['num-trials'];
+$numSamples = (int)$_SESSION['num-parts'];
 $result = '';
 
 $table = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Trial no.</th><th class="wider-column">Sample no.</th>';
@@ -45,7 +45,7 @@ for($i=1;$i<=$numTrials;$i++) {
 } $table .= "</tbody></table>";
 
 $true_values = $_SESSION['vals'];
-//print_r($true_values);
+print_r($true_values);
 //echo 'idddd:'.$_SESSION['id'];
 if(isset($_POST['submit-button'])) {
     echo '<br>';
@@ -97,7 +97,7 @@ if(isset($_POST['submit-button'])) {
             $effectiveness[''.$j] += $correctness[$i.$j];
         }
         $effectiveness[''.$j] /= $numTrials;
-        //echo "effectiveness of app ".$j." is ".$effectiveness[$j]."<br> false accepts : ".$false_accepts[$j]."<br>false rejects : ".$false_rejects[$j]."<br><br>" ;
+        echo "effectiveness of app ".$j." is ".$effectiveness[$j]."<br> false accepts : ".$false_accepts[$j]."<br>false rejects : ".$false_rejects[$j]."<br><br>" ;
     }
     // echo '<br>cor : ';
     // print_r($correctness);
@@ -105,6 +105,8 @@ if(isset($_POST['submit-button'])) {
     // print_r($false_accepts);
 
     $result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Trial no.</th><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th></tr></thead>';
+
+    $final_app_result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th><th>Recommendation</th></tr></thead>';
 
     for($i=1;$i<=$numTrials;$i++) {
         $result .= '<tr><th rowspan="'.$numApp.'">Trial '.$i.'</th>';
@@ -131,13 +133,34 @@ if(isset($_POST['submit-button'])) {
         }
     }
     
-    $result .= "</tbody></table>";
+    $result .= '</tbody></table>';
+    $totalChecks = $numSamples*$numTrials ;
+    for($j=1;$j<=$numApp;$j++) {
+        $final_app_result .= '<tr><th>Appraiser '.$j.'</th>';
+
+        $final_app_result .= '<td>'.$correctness[$j].'/'.$totalChecks.'</td>';
+
+        $final_app_result .= '<td>'.$false_rejects[$j].'/'.$totalChecks.'</td>';
+
+        $final_app_result .= '<td>'.$false_accepts[$j].'/'.$totalChecks.'</td>';
+
+        $final_app_result .= '<td>'.
+        $false_rejects[$j]/$false_accepts[$j]
+        .'</td>';
+
+        $final_app_result .= '<td>'.(($correctness[$j]/$totalChecks)*100).'%</td></tr>';
+    }
+    $final_app_result .= '</tbody></table>';
+
+    $result .= '<br><br>'.$final_app_result;
    
     $query = "UPDATE `attribute-gauge-r&r-study` SET `result` = '".$result."' ";
     if(mysqli_query($link,$query)) {
         header("Location:procedure-5.php?id=".$_SESSION['id']);
     }
     echo $result;
+    echo '<br><br>';
+    echo $final_app_result;
     echo '<br>error : '.mysqli_error($link);
 }
     

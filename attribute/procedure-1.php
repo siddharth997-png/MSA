@@ -34,9 +34,9 @@ if($_POST) {
     $tol = $upper - $lower;
     $numappraisers = 3;
     $appraisersarray = array();
-    $_SESSION['num-app'] = 3;
-    $_SESSION['num-trials'] = 3;
-    $_SESSION['num-parts'] = 10;
+    $_SESSION['num-app'] = $_POST['num-appraisers'];
+    $_SESSION['num-trials'] = $_POST['num-trials'];
+    $_SESSION['num-parts'] = $_POST['num-parts'];
     $appraisers = "";
     $_SESSION['input-app-array'] = "";
     for($i=1;$i<=$_SESSION['num-app'];$i++) {
@@ -199,9 +199,14 @@ if($_POST) {
                                         ?>
                                         
                                     </select>-->                                    
-                                    <div class="alert alert-dark" role="alert">
-                                      3 Appriasers
-                                    </div>
+                                    <select class="form-control" name="num-appraisers" required>
+                                        <option value="" selected disabled hidden>Select Number of Appraisers</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select> 
+                                    
                     
                                 </div>
                             
@@ -244,9 +249,13 @@ if($_POST) {
                                         
                                     </select>-->
                                                                        
-                                <div class="alert alert-dark" role="alert">
-                                     3 Trials
-                                </div>
+                                    <select class="form-control" name="num-trials" required>
+                                        <option value="" selected disabled hidden>Select Number of Trials</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select> 
                     
                                 </div>
                             
@@ -289,9 +298,14 @@ if($_POST) {
                                         
                                     </select>-->
                                     
-                                    <div class="alert alert-dark" role="alert">
-                                     10 Parts
-                                    </div>
+                                    
+                                    <select class="form-control" name="num-parts" required>
+                                        <option value="" selected disabled hidden>Select Number of Parts</option>
+                                        <option value="2">2</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select> 
 
                             </td>
                             <th scope="row"> </th>

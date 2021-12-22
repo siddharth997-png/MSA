@@ -11,6 +11,25 @@ include('../connection.php');
 if(mysqli_connect_error()) {
     die("Connection error");
 } 
+
+$numParts =  (int)$_SESSION['num-parts'];
+$partsTable = "";
+for($i=1;$i<=$numParts;$i++) {
+  $partsTable .= '
+  <tr>
+    <th scope="row">'.$i.'</th>
+    <td>
+      <select name="tv'.$i.'" id="idtv'.$i.'" required>
+      <option value="" disabled selected>Select an option</option>
+      <option value="0">Reject</option>
+      <option value="1">Accept</option>
+      </select>
+    </td>
+  </tr>
+  ';
+}
+
+
 if(isset($_POST['submit-button'])) {
     $vals = array();
     for($i=1;$i<=10;$i++) {
@@ -76,6 +95,9 @@ if(isset($_POST['submit-button'])) {
                 margin-right: 15%;
                 width: 70%;
                 
+            } .table{
+              overflow: scroll;
+              height: 200px;
             }
             
         </style>
@@ -100,130 +122,18 @@ if(isset($_POST['submit-button'])) {
             <form action="" method="POST">
             <table class="table table-bordered border-primary">
   <thead>
-      <!-- ROW 0 -->
+     
     <tr>
-      <th scope="col">Part Number</th>
-      <th scope="col">Input</th>
       <th scope="col">Part Number</th>
       <th scope="col">Input</th>
     </tr>
   </thead>
   <tbody>
+    <?php
+      echo $partsTable;
+    ?>
 
-    <tr>
-      <th scope="row">1</th>
-      <td>
-           <select name="tv1" id="idtv1" required>
-            <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-
-    </td>
-
-      <td>6</td>
-      <td> 
-          <select name="tv6" id="idtv6" required>
-          <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> </td>
-    </tr>
-
-
-      <!-- ROW 2 -->
-    <tr>
-      <th scope="row">2</th>
-      <td>
-
-          <select name="tv2" id="idtv2" required>
-          <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-
-    </td>
     
-      <td>7</td>
-      <td>
-           <select name="tv7" id="idtv7" required >
-           <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-     </td>
-    </tr>
-
-    <!-- ROW 3 -->
-    <tr>
-      <th scope="row">3</th>
-      <td>
-
-          <select name="tv3" id="idtv3" required>
-          <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-
-    </td>
-    
-      <td>8</td>
-      <td>
-           <select name="tv8" id="idtv8" required>
-           <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-     </td>
-    </tr>
-
-    <!-- ROW 4 -->
-    <tr>
-      <th scope="row">4</th>
-      <td>
-
-          <select name="tv4" id="idtv4" required>
-          <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-
-    </td>
-    
-      <td>9</td>
-      <td>
-           <select name="tv9" id="idtv9" required>
-           <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-     </td>
-    </tr>
-
-    <!-- ROW 5 -->
-    <tr>
-      <th scope="row">5</th>
-      <td>
-
-          <select name="tv5" id="idtv5" required>
-          <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-
-    </td>
-    
-      <td>10</td>
-      <td>
-           <select name="tv10" id="idtv10" required>
-           <option value="" disabled selected>Select an option</option>
-            <option value="0">Reject</option>
-            <option value="1">Accept</option>
-            </select> 
-     </td>
-    </tr>
-
-
   </tbody>
 </table> 
 <button type="submit" name="submit-button">Submit</button> 
