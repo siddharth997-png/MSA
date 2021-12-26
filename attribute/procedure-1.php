@@ -145,7 +145,7 @@ if($_POST) {
             }
         
         </style>
-    x
+    
     </head>
     
     <body>
@@ -169,9 +169,11 @@ if($_POST) {
                             <th scope="row"> </th>
                             <td>
                         
-                                <div class="form-group">
+                                <div class="form-group input-field">
                         
-                                    <input class="form-control" type="text" placeholder=" Part No./Drg.No :" id="id-part-number" name="part-number" required>
+                                <label> Part No./Drg.No :</label>
+                                    <input class="form-control" type="text"id="id-part-number" name="part-number" required>
+                                    
                     
                                 </div>
                         
@@ -180,13 +182,13 @@ if($_POST) {
                             
                                 <div class="form-group">
                         
-                                    <input class="form-control" type="text" placeholder=" Instrument Name :" id="id-instrument-name" name="instrument-name" required>
+                                <label>Instrument Name :</label>
+                                    <input class="form-control" type="text" id="id-instrument-name" name="instrument-name" required>
                     
                                 </div>
                             
                             </td>
                             <td>
-                            
                                 <div class="form-group">
                         
                                     <!--<select class="form-control" type="text" placeholder="Number Of Appraisers" id="id-num-app" name="num-app">
@@ -198,9 +200,10 @@ if($_POST) {
                                         
                                         ?>
                                         
-                                    </select>-->                                    
+                                    </select>-->                 
+                                    <label>Select Number of Appraisers : </label>         
                                     <select class="form-control" name="num-appraisers" required>
-                                        <option value="" selected disabled hidden>Select Number of Appraisers</option>
+                                        
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
@@ -219,8 +222,9 @@ if($_POST) {
                             <td>
                         
                                 <div class="form-group">
+                                <label>Part Name : </label>
                         
-                                    <input class="form-control" type="text" placeholder="Part Name :" id="id-part-name" name="part-name" required>
+                                    <input class="form-control" type="text"  id="id-part-name" name="part-name" required>
                     
                                 </div>
                         
@@ -229,7 +233,8 @@ if($_POST) {
                             
                                 <div class="form-group">
                         
-                                    <input class="form-control" type="text" placeholder="Instrument Number :" id="id-instrument-number" name="instrument-number" required>
+                                <label>Instrument Number</label>
+                                    <input class="form-control" type="text" id="id-instrument-number" name="instrument-number" required>
                     
                                 </div>
                             
@@ -248,9 +253,10 @@ if($_POST) {
                                         ?>
                                         
                                     </select>-->
-                                                                       
+                                               
+                                    <label>Select Number of Trials : </label>
                                     <select class="form-control" name="num-trials" required>
-                                        <option value="" selected disabled hidden>Select Number of Trials</option>
+                                        
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
@@ -269,7 +275,8 @@ if($_POST) {
                         
                                 <div class="form-group">
                         
-                                    <input class="form-control" type="text" placeholder="Characteristic :" id="id-characteristic" name="characteristic" required>
+                                <label>Characteristic :</label>
+                                    <input class="form-control" type="text" id="id-characteristic" name="characteristic" required>
                     
                                 </div>
                         
@@ -277,8 +284,8 @@ if($_POST) {
                             <td>
                             
                                 <div class="form-group">
-                        
-                                    <input class="form-control" type="text" placeholder="Gauge Type :" id="id-gauge-type" name="gauge-type" required>
+                                <label>Gauge Type :</label>
+                                    <input class="form-control" type="text" id="id-gauge-type" name="gauge-type" required>
                     
                                 </div>
                             
@@ -298,19 +305,22 @@ if($_POST) {
                                         
                                     </select>-->
                                     
-                                    
+                                    <label>Select Number of Parts : </label>
                                     <select class="form-control" name="num-parts" required>
-                                        <option value="" selected disabled hidden>Select Number of Parts</option>
-                                        <option value="2">2</option>
+                                        
+                                        
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="30">30</option>
+                                        <option value="40">40</option>
+                                        <option value="50">50</option>
                                     </select> 
 
                             </td>
                             <th scope="row"> </th>
                         </tr>
                         
+                        <!-- <!
                         <tr>
                             <th scope="row"> </th>
                             <td>
@@ -345,6 +355,7 @@ if($_POST) {
                             </td>
                             <th scope="row"> </th>
                         </tr>
+                        ---> 
                         
                         <tr>
                             <th scope="row"> </th>
@@ -358,7 +369,7 @@ if($_POST) {
                                 </div> 
                         
                             </td>
-                            <td>
+                            <!-- <td>
                             
                                 <div class="form-group">
 
@@ -366,7 +377,7 @@ if($_POST) {
 
                                 </div>
                             
-                            </td>
+                            </td> -->
                             <td>
                             
                                 <div class="form-group">
@@ -394,78 +405,78 @@ if($_POST) {
         
         <script type="text/javascript">
         
-            $("#id-submit").click(function() {
+            // $("#id-submit").click(function() {
                 
-                var errorMessages = "";
-                if($.isNumeric($("#id-tolerance").val()) && $("#id-tolerance").val() != "" && $.isNumeric($("#id-least-count").val()) && $("#id-least-count").val() != "" && $("#id-least-count").val() > $("#id-tolerance").val()/10) {
+            //     var errorMessages = "";
+            //     if($.isNumeric($("#id-tolerance").val()) && $("#id-tolerance").val() != "" && $.isNumeric($("#id-least-count").val()) && $("#id-least-count").val() != "" && $("#id-least-count").val() > $("#id-tolerance").val()/10) {
                     
-                    errorMessages += "<br>The measuring instrument should be ten times more accurate as the characteristic to be measured<br>Least count should be <= Tolerance/10<br><br> "
+            //         errorMessages += "<br>The measuring instrument should be ten times more accurate as the characteristic to be measured<br>Least count should be <= Tolerance/10<br><br> "
                     
-                } 
+            //     } 
                 
-                if(!$.isNumeric($("#id-specifications").val()) && $("#id-specifications").val() != "") {
+            //     if(!$.isNumeric($("#id-specifications").val()) && $("#id-specifications").val() != "") {
                     
-                    errorMessages += "<br>Enter Valid Specification(in mm)."
+            //         errorMessages += "<br>Enter Valid Specification(in mm)."
                     
-                }  if(!$.isNumeric($("#id-tolerance").val()) && $("#id-tolerance").val() != "") {
+            //     }  if(!$.isNumeric($("#id-tolerance").val()) && $("#id-tolerance").val() != "") {
                     
-                    errorMessages += "<br>Enter Valid tolerance(in mm)."
+            //         errorMessages += "<br>Enter Valid tolerance(in mm)."
                     
-                } if(!$.isNumeric($("#id-least-count").val()) && $("#id-least-count").val() != "") {
+            //     } if(!$.isNumeric($("#id-least-count").val()) && $("#id-least-count").val() != "") {
                     
-                    errorMessages += "<br>Enter Valid Least Count(in mm)."
+            //         errorMessages += "<br>Enter Valid Least Count(in mm)."
                     
-                } //if($("#id-app-a").val() != "" && $("#id-app-b").val() != "" && $("#id-app-c").val() != "" && ($("#id-app-a").val() == $("#id-app-b").val() || ($("#id-app-b").val() == $("#id-app-c").val()) || ($("#id-app-a").val() == $("#id-app-c").val()))) {
+            //     } //if($("#id-app-a").val() != "" && $("#id-app-b").val() != "" && $("#id-app-c").val() != "" && ($("#id-app-a").val() == $("#id-app-b").val() || ($("#id-app-b").val() == $("#id-app-c").val()) || ($("#id-app-a").val() == $("#id-app-c").val()))) {
                     
-                   // errorMessages += "Enter Valid Appraisals.<br><br>";
+            //        // errorMessages += "Enter Valid Appraisals.<br><br>";
                     
-                //}
+            //     //}
                 
-                if($("#id-tolerance").val() != "" && $("#id-specifications").val() != "" && $("#id-upper").val() != "" && $("#id-lower").val()!="" &&
-                    (parseFloat($("#id-upper").val()) + parseFloat($("#id-lower").val())) != ($("#id-specifications").val())*2) {
+            //     if($("#id-tolerance").val() != "" && $("#id-specifications").val() != "" && $("#id-upper").val() != "" && $("#id-lower").val()!="" &&
+            //         (parseFloat($("#id-upper").val()) + parseFloat($("#id-lower").val())) != ($("#id-specifications").val())*2) {
                     
-                    errorMessages += "<br>(Upper limit + Lower Limit)/2 Should be equal to Specification.";
+            //         errorMessages += "<br>(Upper limit + Lower Limit)/2 Should be equal to Specification.";
                     
-                } if($("#id-tolerance").val() != "" && $("#id-specifications").val() != "" && $("#id-upper").val() != "" && $("#id-lower").val()!="" &&
-                    (parseFloat($("#id-upper").val()) - parseFloat($("#id-tolerance").val())) != parseFloat($("#id-specifications").val())) {
+            //     } if($("#id-tolerance").val() != "" && $("#id-specifications").val() != "" && $("#id-upper").val() != "" && $("#id-lower").val()!="" &&
+            //         (parseFloat($("#id-upper").val()) - parseFloat($("#id-tolerance").val())) != parseFloat($("#id-specifications").val())) {
                     
-                    errorMessages += "<br>Upper limit - Tolerance Should be equal to Specification.";
+            //         errorMessages += "<br>Upper limit - Tolerance Should be equal to Specification.";
                     
-                } if($("#id-tolerance").val() != "" && $("#id-specifications").val() != "" && $("#id-upper").val() != "" && $("#id-lower").val()!="" &&
-                    (parseFloat($("#id-lower").val()) + parseFloat($("#id-tolerance").val())) != parseFloat($("#id-specifications").val())) {
+            //     } if($("#id-tolerance").val() != "" && $("#id-specifications").val() != "" && $("#id-upper").val() != "" && $("#id-lower").val()!="" &&
+            //         (parseFloat($("#id-lower").val()) + parseFloat($("#id-tolerance").val())) != parseFloat($("#id-specifications").val())) {
                     
-                    errorMessages += "<br>Lower limit + Tolerance Should be equal to Specification.";
+            //         errorMessages += "<br>Lower limit + Tolerance Should be equal to Specification.";
                     
-                } if($("#id-num-app").val()!="" && $("#id-num-app").val()!=3) {
+            //     } if($("#id-num-app").val()!="" && $("#id-num-app").val()!=3) {
                     
-                    errorMessages += "<br>Enter number of appraisers in valid range.";
+            //         errorMessages += "<br>Enter number of appraisers in valid range.";
                     
-                } if($("#id-num-trials").val()!="" && $("#id-num-trials").val()!=3 ) {
+            //     } if($("#id-num-trials").val()!="" && $("#id-num-trials").val()!=3 ) {
                     
-                    errorMessages += "<br>Enter number of trials in valid range.";
+            //         errorMessages += "<br>Enter number of trials in valid range.";
                     
-                } if($("#id-num-parts").val()!="" && $("#id-num-parts").val()!=10) {
+            //     } if($("#id-num-parts").val()!="" && $("#id-num-parts").val()!=10) {
                     
-                    errorMessages += "<br>Enter number of trials in valid range.";
+            //         errorMessages += "<br>Enter number of trials in valid range.";
                     
-                }
+            //     }
                 
-                if (errorMessages != "") {
+            //     if (errorMessages != "") {
                     
-                    $("#jquery-errors").html( errorMessages);
-                    $("#jquery-errors").show();
-                    $("form").submit(function(e){
-                        e.preventDefault();
-                    });
+            //         $("#jquery-errors").html( errorMessages);
+            //         $("#jquery-errors").show();
+            //         $("form").submit(function(e){
+            //             e.preventDefault();
+            //         });
                     
-                } else {
+            //     } else {
                     
-                    $("#jquery-errors").hide();
-                    $("form")[0].submit();
+            //         $("#jquery-errors").hide();
+            //         $("form")[0].submit();
                     
-                } 
+            //     } 
                 
-            });
+            // });
             
             Date.prototype.toDateInputValue = (function() {
                 
