@@ -32,7 +32,7 @@ for($i=1;$i<=$numParts;$i++) {
 
 if(isset($_POST['submit-button'])) {
     $vals = array();
-    for($i=1;$i<=10;$i++) {
+    for($i=1;$i<=$numParts;$i++) {
         $vals[$i] = $_POST['tv'.$i];
     }
     $_SESSION['vals'] = $vals;
@@ -112,11 +112,6 @@ if(isset($_POST['submit-button'])) {
             <div class="alert " role="alert">
                 <b>
                     Please enter the true values for all the parts. 
-                </b>
-            </div>
-            <div class="alert warning" role="alert">
-                <b>
-                Please make sure that the number of accepted and rejected parts are equal. 
                 </b>
             </div>
             <form action="" method="POST">

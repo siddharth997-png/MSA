@@ -45,11 +45,11 @@ for($i=1;$i<=$numTrials;$i++) {
 } $table .= "</tbody></table>";
 
 $true_values = $_SESSION['vals'];
-print_r($true_values);
+//print_r($true_values);
 //echo 'idddd:'.$_SESSION['id'];
 if(isset($_POST['submit-button'])) {
     echo '<br>';
-    print_r($_POST);
+    //print_r($_POST);
     echo '<br>';
     include('../connection.php');
     if(mysqli_connect_error()) {
@@ -58,6 +58,10 @@ if(isset($_POST['submit-button'])) {
     $correctness = array();
     $false_accepts = array();
     $false_rejects = array();
+    for($j=1;$j<=$numApp;$j++) {
+        $false_accepts[$j] = 0;
+        $false_rejects[$j] = 0;
+    }
     for($i=1;$i<=$numTrials;$i++) {
         for($j=1;$j<=$numApp;$j++) {
             for($k=1;$k<=$numSamples;$k++) {
@@ -107,7 +111,10 @@ if(isset($_POST['submit-button'])) {
     $result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Trial no.</th><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th></tr></thead>';
 
     $final_app_result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th><th>Recommendation</th></tr></thead>';
-
+    $total = array();
+    $total['correct-hits'] = 0;
+    $total['false-rejects'] = 0;
+    $total['false-accepts'] = 0;
     for($i=1;$i<=$numTrials;$i++) {
         $result .= '<tr><th rowspan="'.$numApp.'">Trial '.$i.'</th>';
         for($j=1;$j<=$numApp;$j++) {
@@ -149,18 +156,33 @@ if(isset($_POST['submit-button'])) {
         .'</td>';
 
         $final_app_result .= '<td>'.(($correctness[$j]/$totalChecks)*100).'%</td></tr>';
+
+        $total['correct-hits'] += $correctness[$j];
+        $total['false-rejects'] += $false_rejects[$j];
+        $total['false-accepts'] += $false_accepts[$j];
     }
+    $final_app_result .= '<tr class="table-primary">
+    <th>Total</th>
+    <td>'.$total['correct-hits'].'/'.$totalChecks*$numApp.'</td>
+    <td>'.$total['false-rejects'].'/'.$totalChecks*$numApp.'</td>
+    <td>'.$total['false-accepts'].'/'.$totalChecks*$numApp.'</td>
+    <td>'.$total['false-rejects']/$total['false-accepts'].'</td>
+    <td>'.(($total['correct-hits']/($totalChecks*$numApp))*100).'%</td>
+    </tr>
+    ';
+    
     $final_app_result .= '</tbody></table>';
 
     $result .= '<br><br>'.$final_app_result;
    
     $query = "UPDATE `attribute-gauge-r&r-study` SET `result` = '".$result."' ";
     if(mysqli_query($link,$query)) {
+        echo '<br>hihi';
         header("Location:procedure-5.php?id=".$_SESSION['id']);
     }
     echo $result;
     echo '<br><br>';
-    echo $final_app_result;
+    //echo $final_app_result;
     echo '<br>error : '.mysqli_error($link);
 }
     

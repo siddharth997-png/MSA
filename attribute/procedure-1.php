@@ -32,7 +32,7 @@ if($_POST) {
     $upper = $_POST['upper'];
     $lower = $_POST['lower'];
     $tol = $upper - $lower;
-    $numappraisers = 3;
+    $numappraisers = $_POST['num-appraisers'];
     $appraisersarray = array();
     $_SESSION['num-app'] = $_POST['num-appraisers'];
     $_SESSION['num-trials'] = $_POST['num-trials'];
