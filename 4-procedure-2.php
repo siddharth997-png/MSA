@@ -115,56 +115,11 @@ function getMax($array){
         //<!-- a111 = appraiser 1x trial 1y sample 1z-->
         
         
-        for($y=1;$y<=$numTrials;$y++) {
-            
-            for($z=1;$z<=$numSamples;$z++) {
-                
-                $query = "INSERT INTO `".$_SESSION['tablename']."`(";
-                for($x=1;$x<=$numApp;$x++) {
-
-                    $query .= "`appraiser-".$x."`";
-                    if($x != $numApp) {
-
-                        $query .= ",";
-
-                    }
-
-                } $query .= ") VALUES (";
-                
-                for($x=1;$x<=$numApp;$x++) {
-
-                    $query .= $_POST['a'.$x.$y.$z.''];
-                    if($x != $numApp) {
-
-                        $query .= ",";
-
-                    }
-
-                } $query .= ')';
-                if(!mysqli_query($link,$query)) {
-                    
-                    echo mysqli_error($link);
-                    
-                }
-                
-                
-            }
-            
-            
-        }                            
+                                    
                                          
         
         
-       /* for($i=1;$i<$nu;$i++) {
-
-            for($j=1;$j<=$numSamples;$j++) {
-
-                $query = "INSERT INTO `".$_SESSION['tablename']."`(`appraisal-1`,`appraisal-2`,`appraisal-3`) VALUES ('".$_POST['a1'.$i.$j.'']."','".$_POST['a2'.$i.$j.'']."','".$_POST['a3'.$i.$j.'']."')";
-                mysqli_query($link,$query);
-
-            }
-
-        }*///<!-- a111 = appraiser 1x trial 1y sample 1z-->
+       //<!-- a111 = appraiser 1x trial 1y sample 1z-->
         $arrx_avg = array();
         $arrx_range = array();
         for($x=1;$x<=$numApp;$x++) {
@@ -285,6 +240,9 @@ function getMax($array){
         $X_double_bar = round($X_double_bar,4);
         $Rp = round($Rp,4);
         $X_bar_diff = round($X_bar_diff,4);
+        if($RR == 0) {
+            $RR = 1;
+        }
         $ndc = 1.41*($PV/$RR);
         $Conclusion = "";
         if($ndc > 5) {

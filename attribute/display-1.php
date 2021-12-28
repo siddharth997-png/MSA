@@ -7,7 +7,11 @@
         
     } if(isset($_POST['logout'])) {
         
-        include('../logout.php');
+        $_SESSION['currentId'] = "";
+        session_destroy();
+        echo "logout";
+        header("Location: ./../index.php");
+        echo "<script>window.location.href='../index.php';</script>";
         
     }  $row = "";
     include('../connection.php');
@@ -148,7 +152,7 @@
             
             <a href="../3-mainpage-admin.php" >About You</a>
           
-            <a href="procedure-1.php">Procedure</a>
+            <a href="procedure-1.php">Add New Study</a>
             
             <a href="display-1.php" id="currentUser">Display Conclusions</a>
             

@@ -199,12 +199,6 @@
                       <td>Gauge Type : <?php echo $gaugetype; ?></td>
                       <td>Instrument Number : <?php echo $instrumentnumber; ?></td>
                     </tr>
-                    <tr>
-                      
-                      <td>Specification : <?php echo $specification; ?>mm</td>
-                      <td>Upper Limit : <?php echo $upper; ?>mm</td>
-                      <td>Lower Limit : <?php echo $lower; ?>mm</td>
-                    </tr>
                       
                     <tr>
                       

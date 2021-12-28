@@ -110,7 +110,7 @@ if(isset($_POST['submit-button'])) {
 
     $result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Trial no.</th><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th></tr></thead>';
 
-    $final_app_result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th><th>Recommendation</th></tr></thead>';
+    $final_app_result = '<table class="table table-bordered table-hover"><thead><tr><th class="wider-column">Appraiser</th><th>Correct Hits</th><th>False Rejects</th><th>False Accepts</th><th>Bias</th><th>Effectiveness</th><th>Conclusion</th></tr></thead>';
     $total = array();
     $total['correct-hits'] = 0;
     $total['false-rejects'] = 0;
@@ -155,11 +155,31 @@ if(isset($_POST['submit-button'])) {
         $false_rejects[$j]/$false_accepts[$j]
         .'</td>';
 
-        $final_app_result .= '<td>'.(($correctness[$j]/$totalChecks)*100).'%</td></tr>';
+        $final_app_result .= '<td>'.(($correctness[$j]/$totalChecks)*100).'%</td>';
+
+        $effectiveness = (($correctness[$j]/$totalChecks)*100);
+
+        if($effectiveness >= 90) {
+            $final_app_result .= '<td class="bg-success">ACCEPTABLE</td>';
+        } else if($effectiveness >= 80) {
+            $final_app_result .= '<td class="bg-warning">MARGINALLY ACCEPTABLE</td>';
+        } else {
+            $final_app_result .= '<td class="bg-danger">UNACCEPTABLE</td>';
+        }
+        $final_app_result .= '</tr>';
 
         $total['correct-hits'] += $correctness[$j];
         $total['false-rejects'] += $false_rejects[$j];
         $total['false-accepts'] += $false_accepts[$j];
+    }
+    $final_effectiveness = (($total['correct-hits']/($totalChecks*$numApp))*100);
+    $final_conclusion_row = '';
+    if($final_effectiveness >= 90) {
+        $final_conclusion_row .= '<td class="bg-success">ACCEPTABLE</td>';
+    } else if($final_effectiveness >= 80) {
+        $final_conclusion_row .= '<td class="bg-warning">MARGINALLY ACCEPTABLE</td>';
+    } else {
+        $final_conclusion_row .= '<td class="bg-danger">UNACCEPTABLE</td>';
     }
     $final_app_result .= '<tr class="table-primary">
     <th>Total</th>
@@ -168,11 +188,39 @@ if(isset($_POST['submit-button'])) {
     <td>'.$total['false-accepts'].'/'.$totalChecks*$numApp.'</td>
     <td>'.$total['false-rejects']/$total['false-accepts'].'</td>
     <td>'.(($total['correct-hits']/($totalChecks*$numApp))*100).'%</td>
+    '.$final_conclusion_row.'
     </tr>
     ';
     
     $final_app_result .= '</tbody></table>';
 
+    $result .= '<br><br><h3>GUIDELINES FOR EACH APPRAISERS RESULT :</h3>
+    <table class="table table-bordered">
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">#</th>
+            <th scope="col">Decision</th>
+            <th scope="col">Effictiveness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-success">
+            <th scope="row">1</th>
+            <td>ACCEPTABLE FOR THE APPRAISER</td>
+            <td> >= 90% </td>
+          </tr>
+          <tr class="bg-warning">
+            <th scope="row">2</th>
+            <td>MARGINALLY ACCEPTABLE FOR THE APPRAISER - MAY NEED IMPROVEMENT</td>
+            <td> >= 80% </td>
+          </tr>
+          <tr class="bg-danger">
+            <th scope="row">3</th>
+            <td>UNACCEPTABLE FOR THE APPRAISER - NEEDS IMPROVEMENT </td>
+            <td> < 80% </td>
+          </tr>
+        </tbody>
+    </table>';
     $result .= '<br><br>'.$final_app_result;
    
     $query = "UPDATE `attribute-gauge-r&r-study` SET `result` = '".$result."' ";

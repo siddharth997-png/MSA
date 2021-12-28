@@ -3,6 +3,11 @@ session_start();
 if(!array_key_exists('currentId',$_SESSION)) {
     header("Location: 1-loginpage.php");
 }
+if(!array_key_exists('currentId',$_SESSION)) {
+    header("Location: ./index.php");
+    echo "<script>window.location.href='1-loginpage.php';</script>";
+    
+}
 $row = "";
 include('../connection.php');
 $link = mysqli_connect($host,$username,$pass,$db);
@@ -14,12 +19,7 @@ $query = "SELECT `name` FROM `msa-admins` WHERE `id` = '".$_SESSION['currentId']
 $result = mysqli_query($link,$query);
 $row = mysqli_fetch_array($result);
 $admin = $row['name'];
-$query = "SELECT `name` FROM `msa-inspectors`";
-$result = mysqli_query($link,$query);
-$inspectorArray = "";
-while($row = mysqli_fetch_array($result)) {
-    $inspectorArray .="<option value='".$row['name']."'>".$row['name']."</option>";
-} 
+
 if($_POST) {
     $part_number = mysqli_real_escape_string($link,$_POST['part-number']);
     $_SESSION['part-number'] = $part_number;
@@ -41,7 +41,7 @@ if($_POST) {
     $_SESSION['input-app-array'] = "";
     for($i=1;$i<=$_SESSION['num-app'];$i++) {
         
-        $_SESSION['input-app-array'] .= '<select class="form-control" type="text" placeholder="Appraiser '.$i.' : " id="id-app-'.$i.'" name="app-'.$i.'" required><option value="" disabled selected>Appraisal '.$i.'</option>'.$inspectorArray.'</select>';
+        $_SESSION['input-app-array'] .= '<input class="form-control" type="text" placeholder="Appraiser '.$i.' : " id="id-app-'.$i.'" name="app-'.$i.'" required></input>';
         
     }
     $id = uniqid();

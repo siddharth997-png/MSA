@@ -148,7 +148,7 @@
             
             <a href="3-mainpage-admin.php" >About You</a>
           
-            <a href="4-procedure-1.php">Procedure</a>
+            <a href="4-procedure-1.php">Add New Study</a>
             
             <a href="5-display-1.php" id="currentUser">Display Conclusions</a>
             
