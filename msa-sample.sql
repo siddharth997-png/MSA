@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 04, 2020 at 11:28 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- Host: 127.0.0.1
+-- Generation Time: Jan 30, 2022 at 11:01 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,8 +21,32 @@ SET time_zone = "+00:00";
 -- Database: `msa-sample`
 --
 
-CREATE DATABASE `msa-sample`;
-USE `msa-sample`;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute-gauge-r&r-study`
+--
+
+CREATE TABLE `attribute-gauge-r&r-study` (
+  `id` int(11) NOT NULL,
+  `idd` text NOT NULL,
+  `part-number` varchar(200) NOT NULL,
+  `part-name` varchar(200) NOT NULL,
+  `instrument-number` varchar(200) NOT NULL,
+  `instrument-name` varchar(200) NOT NULL,
+  `characteristic` varchar(80) NOT NULL,
+  `gauge-type` varchar(80) NOT NULL,
+  `specification` varchar(80) NOT NULL,
+  `upper` double NOT NULL,
+  `lower` double NOT NULL,
+  `trials` int(11) NOT NULL DEFAULT 10,
+  `parts` int(11) NOT NULL DEFAULT 3,
+  `numappraisers` int(11) NOT NULL DEFAULT 3,
+  `appraisers` text NOT NULL,
+  `performer` varchar(200) NOT NULL,
+  `date` date NOT NULL,
+  `result` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -47,8 +71,7 @@ CREATE TABLE `msa-admins` (
 --
 
 INSERT INTO `msa-admins` (`id`, `name`, `email`, `state`, `city`, `password`, `dob`, `address`, `image`) VALUES
-(5, 'Admin', 'admin@gmail.com', 'Maharashtra', 'Pune', '$2y$10$bkqRN63PDp5EaSDJYlR38uTP5YrtwFCK9FNFRJc7UU4X6U.641CUq', '1111-11-11', '-', 'admin.png'),
-(6, '', '', '', '', '$2y$10$AWfPXIk8zShgmu1ID800Ve12wAKw/cIFQfY5DfihRsr.6OcBh7o8m', '0000-00-00', '', '');
+(5, 'Admin', 'admin@gmail.com', 'Maharashtra', 'Pune', '$2y$10$bkqRN63PDp5EaSDJYlR38uTP5YrtwFCK9FNFRJc7UU4X6U.641CUq', '1111-11-11', '-', 'admin.png');
 
 -- --------------------------------------------------------
 
@@ -134,6 +157,12 @@ CREATE TABLE `msa-procedure-results` (
 --
 
 --
+-- Indexes for table `attribute-gauge-r&r-study`
+--
+ALTER TABLE `attribute-gauge-r&r-study`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `msa-admins`
 --
 ALTER TABLE `msa-admins`
@@ -160,6 +189,12 @@ ALTER TABLE `msa-procedure-results`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `attribute-gauge-r&r-study`
+--
+ALTER TABLE `attribute-gauge-r&r-study`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `msa-admins`

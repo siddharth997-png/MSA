@@ -126,8 +126,14 @@ if(isset($_POST['submit-button'])) {
 
             $result .= '<td>'.$false_accepts[$i.$j].'/'.$numSamples.'</td>';
 
+            $bias;
+            if($false_accepts[$i.$j] !== 0) {
+                $bias = $false_rejects[$i.$j]/$false_accepts[$i.$j];
+            } else {
+                $bias = "INF";
+            }
             $result .= '<td>'.
-            $false_rejects[$i.$j]/$false_accepts[$i.$j]
+            $bias
             .'</td>';
 
             $result .= '<td>'.(($correctness[$i.$j]/$numSamples)*100).'%</td>';
@@ -151,8 +157,15 @@ if(isset($_POST['submit-button'])) {
 
         $final_app_result .= '<td>'.$false_accepts[$j].'/'.$totalChecks.'</td>';
 
+        $bias;
+        if($false_accepts[$j] !== 0) {
+            $bias = $false_rejects[$j]/$false_accepts[$j];
+        } else {
+            $bias = "INF";
+        }
+
         $final_app_result .= '<td>'.
-        $false_rejects[$j]/$false_accepts[$j]
+        $bias
         .'</td>';
 
         $final_app_result .= '<td>'.(($correctness[$j]/$totalChecks)*100).'%</td>';
